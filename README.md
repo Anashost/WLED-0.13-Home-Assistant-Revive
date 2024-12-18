@@ -40,6 +40,8 @@ Lets say we want our new light name to be `light.wled_desk_led` start by doing t
 
 ## 1 - Preparations
 
+- Make sure to remove the unsupported led's from Wled integration.
+
 - If not already, start by creating those files in Home Assistant root directory
 `rest_command.yaml`,  `lights.yaml`, `input_select.yaml`
 
