@@ -11,6 +11,12 @@ Working features:
 - change brightness
 - change effect
 
+<div style="text-align:center">
+    <img src="https://github.com/user-attachments/assets/811b13db-88dd-43de-95dd-0ddf735c4bd6" style="display:inline-block; width:30%; max-width:100px; margin:20px auto;">
+    <img src="https://github.com/user-attachments/assets/bb4305e1-7c9f-41f4-95dc-54f79120ef26" style="display:inline-block; width:30%; max-width:100px; margin:20px auto;">
+</div>
+
+
 <hr>
 
 Lests say we want our new light name to be `light.wled_desk_led` start by doing the following:
