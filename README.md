@@ -1,7 +1,23 @@
+[![Community Forum][community_forum_shield]][community_forum]<!-- anashost_support_badges_start -->
+[![Revolut.Me][revolut_me_shield]][revolut_me]
+[![PayPal.Me][paypal_me_shield]][paypal_me]
+[![ko_fi][ko_fi_shield]][ko_fi_me]
+[![buymecoffee][buy_me_coffee_shield]][buy_me_coffee_me]
+<!-- anashost_support_badges_end -->
+<!-- 
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
+-->
+
 # WLED 0.13.3 Home Assistant Revive
 Got an old WLED controller stuck on version v0.13.3 (or maybe even older)? Don’t worry—your trusty little device isn’t destined for the junk drawer just yet! Even though those 1MB flash controllers can’t handle the latest updates, there’s a fun and creative way to make them work seamlessly with the latest Home Assistant versions.
 
-Note that this methode is a 1 way communivcation with the controller, as we are sending commands to the controller using http res commands. but dont worry it will function normally in the UI.
+Note that this method is a 1 way communication with the controller, as we are sending commands to the controller using http res commands. But dont worry it will function normally in the UI.
 
 Working features:
 - on
@@ -34,11 +50,11 @@ rest_command: !include rest_command.yaml
 light: !include lights.yaml
 ```
 
-- To make thing easy, use a text editor (Find & Replace All) tool to replace the word `desk` with the name you want.
+- To make thing easy, use a text editor (Find & Replace All) tool to replace the word `desk` and `Desk` with the name you want.
 
 ## 2 - Create a rest command to communicate with WLED controller:
 
-* paste this to your `rest_command.yaml`
+* paste the rest command to your `rest_command.yaml`
 * replace ip with your conroller ip
 
 <details>
@@ -55,7 +71,7 @@ light: !include lights.yaml
 * paste this to your `lights.yaml`
 
 <details>
-  <summary>Desk light template</summary>
+  <summary>light template</summary>
   
 ```
   - platform: template
@@ -103,7 +119,7 @@ light: !include lights.yaml
 </details>
 
 ## 4 - Create those 3 scripts:
-those scripts are used to pass rest commands to your controller:
+those scripts are used to pass rest commands to your controller. Paste them to your `scripts.yaml`.
 
 <details>
   <summary>script 1 - On/activities</summary>
@@ -298,8 +314,8 @@ wled_desk_led_effect:
 
 </details>
 
-## 5 - create the follwing Helpers for each LED Controller:
-We use those to save the diffrent states of the lights like: Toggle, Brightness, RED, Green, BLUE
+## 5 - Create the following Helpers
+We use those to save and retain the different states of the lights like: On, Off, Brightness, RGB colors values and last effect..
 
 <details>
   <summary>Hellpers</summary>
@@ -339,7 +355,7 @@ input_number:
 </details>
 
 ## 6 - We need one more helper for effects:
-this one we will create as yaml as it will take sio much time to create in the UI
+this one we will create as yaml as it will take so much time to create in the ui.
 
 * add this to `input_select.yaml`
 
@@ -536,6 +552,37 @@ this one we will create as yaml as it will take sio much time to create in the U
 ```
 </details>
 
-Now Restart Home Assistant and find your new light, in my case `light.wled_desk_led` and you can use it in the UI Normally.
+Now Restart Home Assistant and find your new light, in my case `light.wled_desk_led`.
 
-### Have Fun...
+### Have Fun... and if you face any issue i will be happy to help if i got the time..
+
+[latest_release]: https://github.com/Anashost/MY-HA-DASH/releases/latest
+
+[releases_shield]: https://img.shields.io/github/release/Anashost/MY-HA-DASH.svg?style=popout
+
+[releases]: https://github.com/Anashost/MY-HA-DASH/releases
+
+[downloads_total_shield]: https://img.shields.io/github/downloads/Anashost/MY-HA-DASH/total
+
+[community_forum_shield]: 
+https://img.shields.io/badge/Fourms-23cede?style=for-the-badge&logo=HomeAssistant&logoColor=white
+
+[community_forum]: https://github.com/Anashost/MY-HA-DASH/issues
+
+[paypal_me_shield]: https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white
+
+[paypal_me]: https://paypal.me/anasboxsupport
+
+[revolut_me_shield]:
+https://img.shields.io/badge/revolut-FFFFFF?style=for-the-badge&logo=revolut&logoColor=black
+
+[revolut_me]: https://revolut.me/anas4e
+
+[ko_fi_shield]: https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white
+
+[ko_fi_me]: https://ko-fi.com/anasbox
+
+[buy_me_coffee_shield]: 
+https://img.shields.io/badge/Buy%20Me%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black
+
+[buy_me_coffee_me]: https://www.buymeacoffee.com/anasbox
