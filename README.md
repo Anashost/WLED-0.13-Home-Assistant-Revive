@@ -19,7 +19,7 @@ Working features:
 
 <hr>
 
-Lests say we want our new light name to be `light.wled_desk_led` start by doing the following:
+Lets say we want our new light name to be `light.wled_desk_led` start by doing the following:
 
 ## 1 - Preparations
 
