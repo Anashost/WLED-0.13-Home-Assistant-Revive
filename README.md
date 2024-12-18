@@ -29,8 +29,8 @@ Working features:
 Tested on WS2812b LED
 
 <div style="text-align:center">
-    <img src="https://github.com/user-attachments/assets/811b13db-88dd-43de-95dd-0ddf735c4bd6" style="display:inline-block; width:30%; max-width:100px; margin:20px auto;">
-    <img src="https://github.com/user-attachments/assets/bb4305e1-7c9f-41f4-95dc-54f79120ef26" style="display:inline-block; width:30%; max-width:100px; margin:20px auto;">
+    <img src="https://github.com/user-attachments/assets/811b13db-88dd-43de-95dd-0ddf735c4bd6" style="display:inline-block; width:35%; max-width:150px; margin:20px auto;">
+    <img src="https://github.com/user-attachments/assets/bb4305e1-7c9f-41f4-95dc-54f79120ef26" style="display:inline-block; width:35%; max-width:150px; margin:20px auto;">
 </div>
 
 
