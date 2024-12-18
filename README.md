@@ -22,7 +22,6 @@ Note that this method is a 1 way communication with the controller, as we are se
 Working features:
 - on
 - off
-- toggle
 - change color
 - change brightness
 - change effect
