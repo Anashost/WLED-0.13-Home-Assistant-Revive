@@ -66,7 +66,7 @@ light: !include lights.yaml
   
 ```
   wled_desk_led:
-    url: "http://10.0.0.107/win&T={{ on }}&A={{ brightness }}&R={{ red }}&G={{ green }}&B={{ blue }}&FX={{ effect }}"
+    url: "http://10.0.0.107/win&T={{ on }}&A={{ brightness }}&R={{ red }}&G={{ green }}&B={{ blue }}{% if effect is defined %}&FX={{ effect }}{% endif %}"
 ```
 </details>
   
