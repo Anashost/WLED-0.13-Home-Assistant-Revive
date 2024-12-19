@@ -571,7 +571,7 @@ Now Restart Home Assistant and find your new light, in my case `light.wled_desk_
 [community_forum_shield]: 
 https://img.shields.io/badge/Fourms-23cede?style=for-the-badge&logo=HomeAssistant&logoColor=white
 
-[community_forum]: https://github.com/Anashost/MY-HA-DASH/issues
+[community_forum]: https://community.home-assistant.io/t/wled-0-13-x-led-controller-home-assistant-revive/812940
 
 [paypal_me_shield]: https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white
 
