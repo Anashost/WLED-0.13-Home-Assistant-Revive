@@ -17,7 +17,9 @@
 # WLED 0.13.x LED Controller Home Assistant Revive
 >Got an old WLED controller stuck on version v0.13.x, or any version below v0.14.0? Don’t worry.. your trusty little device isn’t destined for the junk drawer just yet! Even though those 1MB flash controllers can’t handle the latest WLED updates, there’s a fun and creative way to make those unsupported controller work seamlessly with the latest Home Assistant versions. In my case i have "7" unsupported controllers stuck at v0.13.1 and v0.13.3, so making them work again in Home Assistant was a win.
 
-Note that this method is a 1 way communication with the controller, as we are sending commands to the controller using http REST commands. But dont worry it will function normally in Home Assistant.
+~Note that this method is a 1 way communication with the controller, as we are sending commands to the
+controller using http REST commands. But dont worry it will function normally in Home Assistant.~
+`Fixed` - this is now 2 way communication using Http Polling. See **step 7**.
 
 Working features:
 - on
@@ -553,6 +555,155 @@ this one we will create as yaml as it will take so much time to create in the ui
       - Akemi
     initial: Solid
     icon: mdi:palette
+
+```
+</details>
+
+## 7 - Polling status from the controller:
+to make this merthod works as 2 way communication, we will emplement http polling, which will poll the states of the comtroller every x time.
+
+* add this to `sensors.yaml`
+
+<details>
+  <summary>Polling code</summary>
+  
+```
+  - platform: rest
+    name: "WLED Desk Poll"
+    resource: "http://10.0.0.107/json/state"
+    scan_interval: 5
+    json_attributes:
+      - on
+      - bri
+      - seg
+    value_template: "{{ value_json.on }}"
+
+  - platform: template
+    sensors:
+      wled_desk_poll_brightness:
+        friendly_name: "WLED Desk Poll Brightness"
+        value_template: "{{ state_attr('sensor.wled_desk_poll', 'bri') }}"
+      
+      wled_desk_poll_red:
+        friendly_name: "WLED Desk Poll Red"
+        value_template: "{{ state_attr('sensor.wled_desk_poll', 'seg')[0].col[0][0] }}"
+      
+      wled_desk_poll_green:
+        friendly_name: "WLED Desk Poll Green"
+        value_template: "{{ state_attr('sensor.wled_desk_poll', 'seg')[0].col[0][1] }}"
+      
+      wled_desk_poll_blue:
+        friendly_name: "WLED Desk Poll Blue"
+        value_template: "{{ state_attr('sensor.wled_desk_poll', 'seg')[0].col[0][2] }}"
+
+      wled_desk_poll_current_effect:
+        friendly_name: "WLED Desk Poll Current Effect"
+        value_template: >
+            {% set effects = [
+              "Solid", "Blink", "Breathe", "Wipe", "Wipe Random", "Random Colors",
+              "Sweep", "Dynamic", "Colorloop", "Rainbow", "Scan", "Scan Dual",
+              "Fade", "Theater", "Theater Rainbow", "Running", "Saw", "Twinkle",
+              "Dissolve", "Dissolve Rnd", "Sparkle", "Sparkle Dark", "Sparkle+",
+              "Strobe", "Strobe Rainbow", "Strobe Mega", "Blink Rainbow",
+              "Android", "Chase", "Chase Random", "Chase Rainbow", "Chase Flash",
+              "Chase Flash Rnd", "Rainbow Runner", "Colorful", "Traffic Light",
+              "Sweep Random", "Chase 2", "Aurora", "Stream", "Scanner", "Lighthouse",
+              "Fireworks", "Rain", "Tetrix", "Fire Flicker", "Gradient", "Loading",
+              "Rolling Balls", "Fairy", "Two Dots", "Fairytwinkle", "Running Dual",
+              "Chase 3", "Tri Wipe", "Tri Fade", "Lightning", "ICU", "Multi Comet",
+              "Scanner Dual", "Stream 2", "Oscillate", "Pride 2015", "Juggle",
+              "Palette", "Fire 2012", "Colorwaves", "Bpm", "Fill Noise", "Noise 1",
+              "Noise 2", "Noise 3", "Noise 4", "Colortwinkles", "Lake", "Meteor",
+              "Meteor Smooth", "Railway", "Ripple", "Twinklefox", "Twinklecat",
+              "Halloween Eyes", "Solid Pattern", "Solid Pattern Tri", "Spots",
+              "Spots Fade", "Glitter", "Candle", "Fireworks Starburst",
+              "Fireworks 1D", "Bouncing Balls", "Sinelon", "Sinelon Dual",
+              "Sinelon Rainbow", "Popcorn", "Drip", "Plasma", "Percent",
+              "Ripple Rainbow", "Heartbeat", "Pacifica", "Candle Multi",
+              "Solid Glitter", "Sunrise", "Phased", "Twinkleup", "Noise Pal",
+              "Sine", "Phased Noise", "Flow", "Chunchun", "Dancing Shadows",
+              "Washing Machine", "Rotozoomer", "Blends", "TV Simulator",
+              "Dynamic Smooth", "Spaceships", "Crazy Bees", "Ghost Rider", "Blobs",
+              "Scrolling Text", "Drift Rose", "Distortion Waves", "Soap", "Octopus",
+              "Waving Cell", "Pixels", "Pixelwave", "Juggles", "Matripix", "Gravimeter",
+              "Plasmoid", "Puddles", "Midnoise", "Noisemeter", "Freqwave", "Freqmatrix",
+              "GEQ", "Waterfall", "Freqpixels", "Noisefire", "Puddlepeak", "Noisemove",
+              "Noise2D", "Perlin Move", "Ripple Peak", "Firenoise", "Squared Swirl",
+              "DNA", "Matrix", "Metaballs", "Freqmap", "Gravcenter", "Gravcentric",
+              "Gravfreq", "DJ Light", "Funky Plank", "Pulser", "Blurz", "Drift",
+              "Waverly", "Sun Radiation", "Colored Bursts", "Julia", "Game Of Life",
+              "Tartan", "Polar Lights", "Swirl", "Lissajous", "Frizzles", "Plasma Ball",
+              "Flow Stripe", "Hiphotic", "Sindots", "DNA Spiral", "Black Hole",
+              "Wavesins", "Rocktaves", "Akemi"
+            ] %}
+            {% set effect_id = state_attr('sensor.wled_desk_poll', 'seg')[0].fx %}
+            {% if effect_id < effects | length %}
+              {{ effects[effect_id] }}
+            {% else %}
+              "Solid"
+            {% endif %}
+```
+</details>
+
+<details>
+  <summary>Automation to sync the light state</summary>
+  
+```
+alias: WLED Desk Poll From App
+description: ""
+triggers:
+  - entity_id:
+      - sensor.wled_desk_poll
+      - sensor.wled_desk_poll_brightness
+      - sensor.wled_desk_poll_red
+      - sensor.wled_desk_poll_green
+      - sensor.wled_desk_poll_blue
+      - sensor.wled_desk_poll_current_effect
+    trigger: state
+actions:
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ is_state('sensor.wled_desk_poll', 'True') }}"
+        sequence:
+          - target:
+              entity_id: input_boolean.wled_desk_led_state
+            action: input_boolean.turn_on
+            data: {}
+      - conditions:
+          - condition: template
+            value_template: "{{ is_state('sensor.wled_desk_poll', 'False') }}"
+        sequence:
+          - target:
+              entity_id: input_boolean.wled_desk_led_state
+            action: input_boolean.turn_off
+            data: {}
+  - target:
+      entity_id: input_number.wled_desk_led_brightness
+    data:
+      value: "{{ states('sensor.wled_desk_poll_brightness') | int }}"
+    action: input_number.set_value
+    enabled: true
+  - target:
+      entity_id: input_number.wled_desk_led_red
+    data:
+      value: "{{ states('sensor.wled_desk_poll_red') | int }}"
+    action: input_number.set_value
+  - target:
+      entity_id: input_number.wled_desk_led_green
+    data:
+      value: "{{ states('sensor.wled_desk_poll_green') | int }}"
+    action: input_number.set_value
+  - target:
+      entity_id: input_number.wled_desk_led_blue
+    data:
+      value: "{{ states('sensor.wled_desk_poll_blue') | int }}"
+    action: input_number.set_value
+  - target:
+      entity_id: input_select.wled_desk_led_effect
+    data:
+      option: "{{ states('sensor.wled_desk_poll_current_effect') }}"
+    action: input_select.select_option
 
 ```
 </details>
