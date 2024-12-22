@@ -53,7 +53,7 @@ rest_command: !include rest_command.yaml
 light: !include lights.yaml
 ```
 
-- To make thing easy, use a text editor (Find & Replace All) tool to replace the word `desk` and `Desk` with the name you want. make sure to replace it everywhere and to double check, before comming yalling at me ;-)
+- To make thing easy, use a text editor (Find & Replace All) tool to replace the word `desk` and `Desk` with the name you want. make sure to replace it everywhere and to double check, before coming yalling at me ;-)
 - You have to do all the steps below for EVERY v0.13.3 controller you have.
 
 ## 2 - Create a rest command to communicate with WLED controller:
