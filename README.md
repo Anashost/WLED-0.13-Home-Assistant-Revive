@@ -563,6 +563,7 @@ this one we will create as yaml as it will take so much time to create in the ui
 to make this method works as 2 way communication, we will implement http polling, which will let us poll the states of the comtroller every x time. In my case i set the interval at 5 seconds.
 
 * add polling logic to your `sensors.yaml`
+* replace controller ip address with yours.
 
 <details>
   <summary>Polling logic</summary>
