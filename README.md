@@ -560,12 +560,12 @@ this one we will create as yaml as it will take so much time to create in the ui
 </details>
 
 ## 7 - Polling status from the controller:
-to make this merthod works as 2 way communication, we will emplement http polling, which will poll the states of the comtroller every x time.
+to make this method works as 2 way communication, we will implement http polling, which will poll the states of the comtroller every x time. In my case i set the interval at 5 seconds, you can set it as you like.
 
-* add this to `sensors.yaml`
+* add polling logic to your `sensors.yaml`
 
 <details>
-  <summary>Polling code</summary>
+  <summary>Polling logic</summary>
   
 ```
   - platform: rest
@@ -646,7 +646,7 @@ to make this merthod works as 2 way communication, we will emplement http pollin
 </details>
 
 <details>
-  <summary>Automation to sync the light state</summary>
+  <summary>Automation to sync the light states with wled app</summary>
   
 ```
 alias: WLED Desk Poll From App
