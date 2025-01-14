@@ -17,10 +17,11 @@
 # WLED 0.13.x LED Controller Home Assistant Revive
 >Got an old WLED controller stuck on version v0.13.x, or any version below v0.14.0? Don’t worry.. your trusty little device isn’t destined for the junk drawer just yet! Even though those 1MB flash controllers can’t handle the latest WLED updates, there’s a fun and creative way to make those unsupported controller work seamlessly with the latest Home Assistant versions. In my case i have "7" unsupported controllers stuck at v0.13.1 and v0.13.3, so making them work again in Home Assistant was a win.
 
-~Note that this method is a 1 way communication with the controller, as we are sending commands to the
-controller using http REST commands.~ `Fixed` -  now working as two way communication using HTTP Polling. See **step 7**.
+### Updates:
+- `24 Dec 2024`: now working as two way communication using HTTP Polling. See **step 7**.
+- `14 Jan 2025`: effect list fixed: removed newer effects that do not exist in wled v0.13.1.
 
-Working features:
+### Working features:
 - on
 - off
 - change color
