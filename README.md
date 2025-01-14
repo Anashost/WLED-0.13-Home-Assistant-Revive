@@ -574,9 +574,9 @@ to make this method works as 2 way communication, we will implement http polling
               "Chase Flash Rnd", "Rainbow Runner", "Colorful", "Traffic Light",
               "Sweep Random", "Chase 2", "Aurora", "Stream", "Scanner", "Lighthouse",
               "Fireworks", "Rain", "Tetrix", "Fire Flicker", "Gradient", "Loading",
-              "Rolling Balls", "Fairy", "Two Dots", "Fairytwinkle", "Running Dual",
+              "Fairy", "Two Dots", "Fairytwinkle", "Running Dual",
               "Chase 3", "Tri Wipe", "Tri Fade", "Lightning", "ICU", "Multi Comet",
-              "Scanner Dual", "Stream 2", "Oscillate", "Pride 2015", "Juggle",
+              "Scanner Dual", "Stream 2", "Oscillate", "Pride 2012", "Juggle",
               "Palette", "Fire 2012", "Colorwaves", "Bpm", "Fill Noise", "Noise 1",
               "Noise 2", "Noise 3", "Noise 4", "Colortwinkles", "Lake", "Meteor",
               "Meteor Smooth", "Railway", "Ripple", "Twinklefox", "Twinklecat",
@@ -587,19 +587,8 @@ to make this method works as 2 way communication, we will implement http polling
               "Ripple Rainbow", "Heartbeat", "Pacifica", "Candle Multi",
               "Solid Glitter", "Sunrise", "Phased", "Twinkleup", "Noise Pal",
               "Sine", "Phased Noise", "Flow", "Chunchun", "Dancing Shadows",
-              "Washing Machine", "Rotozoomer", "Blends", "TV Simulator",
-              "Dynamic Smooth", "Spaceships", "Crazy Bees", "Ghost Rider", "Blobs",
-              "Scrolling Text", "Drift Rose", "Distortion Waves", "Soap", "Octopus",
-              "Waving Cell", "Pixels", "Pixelwave", "Juggles", "Matripix", "Gravimeter",
-              "Plasmoid", "Puddles", "Midnoise", "Noisemeter", "Freqwave", "Freqmatrix",
-              "GEQ", "Waterfall", "Freqpixels", "Noisefire", "Puddlepeak", "Noisemove",
-              "Noise2D", "Perlin Move", "Ripple Peak", "Firenoise", "Squared Swirl",
-              "DNA", "Matrix", "Metaballs", "Freqmap", "Gravcenter", "Gravcentric",
-              "Gravfreq", "DJ Light", "Funky Plank", "Pulser", "Blurz", "Drift",
-              "Waverly", "Sun Radiation", "Colored Bursts", "Julia", "Game Of Life",
-              "Tartan", "Polar Lights", "Swirl", "Lissajous", "Frizzles", "Plasma Ball",
-              "Flow Stripe", "Hiphotic", "Sindots", "DNA Spiral", "Black Hole",
-              "Wavesins", "Rocktaves", "Akemi"
+              "Washing Machine", "Candy Cane", "Blends", "TV Simulator",
+              "Dynamic Smooth"
             ] %}
             {% set effect_id = state_attr('sensor.wled_desk_poll', 'seg')[0].fx %}
             {% if effect_id < effects | length %}
