@@ -223,7 +223,7 @@ wled_desk_led_effect:
       red: '{{ states(''input_number.wled_desk_led_red'') | int }}'
       green: '{{ states(''input_number.wled_desk_led_green'') | int }}'
       blue: '{{ states(''input_number.wled_desk_led_blue'') | int }}'
-      effect: >
+      effect: '
         {% set effect = states(''input_select.wled_desk_led_effect'') %}
         {% if effect == ''Solid'' %}0
         {% elif effect == ''Blink'' %}1
@@ -343,6 +343,7 @@ wled_desk_led_effect:
         {% elif effect == ''Dynamic Smooth'' %}117
         {% else %}0
         {% endif %}
+        '
     action: rest_command.wled_desk_led
   description: ''
 ```
