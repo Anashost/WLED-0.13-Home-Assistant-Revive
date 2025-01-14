@@ -369,191 +369,127 @@ this one we will create as yaml as it will take so much time to create in the ui
   <summary>effects List</summary>
   
 ```
-  wled_desk_led_effect:
-    name: "WLED Desk Led Effect"
-    options:
-      - Solid
-      - Blink
-      - Breathe
-      - Wipe
-      - Wipe Random
-      - Random Colors
-      - Sweep
-      - Dynamic
-      - Colorloop
-      - Rainbow
-      - Scan
-      - Scan Dual
-      - Fade
-      - Theater
-      - Theater Rainbow
-      - Running
-      - Saw
-      - Twinkle
-      - Dissolve
-      - Dissolve Rnd
-      - Sparkle
-      - Sparkle Dark
-      - Sparkle+
-      - Strobe
-      - Strobe Rainbow
-      - Strobe Mega
-      - Blink Rainbow
-      - Android
-      - Chase
-      - Chase Random
-      - Chase Rainbow
-      - Chase Flash
-      - Chase Flash Rnd
-      - Rainbow Runner
-      - Colorful
-      - Traffic Light
-      - Sweep Random
-      - Chase 2
-      - Aurora
-      - Stream
-      - Scanner
-      - Lighthouse
-      - Fireworks
-      - Rain
-      - Tetrix
-      - Fire Flicker
-      - Gradient
-      - Loading
-      - Rolling Balls
-      - Fairy
-      - Two Dots
-      - Fairytwinkle
-      - Running Dual
-      - Chase 3
-      - Tri Wipe
-      - Tri Fade
-      - Lightning
-      - ICU
-      - Multi Comet
-      - Scanner Dual
-      - Stream 2
-      - Oscillate
-      - Pride 2015
-      - Juggle
-      - Palette
-      - Fire 2012
-      - Colorwaves
-      - Bpm
-      - Fill Noise
-      - Noise 1
-      - Noise 2
-      - Noise 3
-      - Noise 4
-      - Colortwinkles
-      - Lake
-      - Meteor
-      - Meteor Smooth
-      - Railway
-      - Ripple
-      - Twinklefox
-      - Twinklecat
-      - Halloween Eyes
-      - Solid Pattern
-      - Solid Pattern Tri
-      - Spots
-      - Spots Fade
-      - Glitter
-      - Candle
-      - Fireworks Starburst
-      - Fireworks 1D
-      - Bouncing Balls
-      - Sinelon
-      - Sinelon Dual
-      - Sinelon Rainbow
-      - Popcorn
-      - Drip
-      - Plasma
-      - Percent
-      - Ripple Rainbow
-      - Heartbeat
-      - Pacifica
-      - Candle Multi
-      - Solid Glitter
-      - Sunrise
-      - Phased
-      - Twinkleup
-      - Noise Pal
-      - Sine
-      - Phased Noise
-      - Flow
-      - Chunchun
-      - Dancing Shadows
-      - Washing Machine
-      - Rotozoomer
-      - Blends
-      - TV Simulator
-      - Dynamic Smooth
-      - Spaceships
-      - Crazy Bees
-      - Ghost Rider
-      - Blobs
-      - Scrolling Text
-      - Drift Rose
-      - Distortion Waves
-      - Soap
-      - Octopus
-      - Waving Cell
-      - Pixels
-      - Pixelwave
-      - Juggles
-      - Matripix
-      - Gravimeter
-      - Plasmoid
-      - Puddles
-      - Midnoise
-      - Noisemeter
-      - Freqwave
-      - Freqmatrix
-      - GEQ
-      - Waterfall
-      - Freqpixels
-      - Noisefire
-      - Puddlepeak
-      - Noisemove
-      - Noise2D
-      - Perlin Move
-      - Ripple Peak
-      - Firenoise
-      - Squared Swirl
-      - DNA
-      - Matrix
-      - Metaballs
-      - Freqmap
-      - Gravcenter
-      - Gravcentric
-      - Gravfreq
-      - DJ Light
-      - Funky Plank
-      - Pulser
-      - Blurz
-      - Drift
-      - Waverly
-      - Sun Radiation
-      - Colored Bursts
-      - Julia
-      - Game Of Life
-      - Tartan
-      - Polar Lights
-      - Swirl
-      - Lissajous
-      - Frizzles
-      - Plasma Ball
-      - Flow Stripe
-      - Hiphotic
-      - Sindots
-      - DNA Spiral
-      - Black Hole
-      - Wavesins
-      - Rocktaves
-      - Akemi
-    initial: Solid
-    icon: mdi:palette
+wled_desk_led_effect:
+  name: "WLED Desk Led Effect"
+  options:
+    - Solid
+    - Blink
+    - Breathe
+    - Wipe
+    - Wipe Random
+    - Random Colors
+    - Sweep
+    - Dynamic
+    - Colorloop
+    - Rainbow
+    - Scan
+    - Scan Dual
+    - Fade
+    - Theater
+    - Theater Rainbow
+    - Running
+    - Saw
+    - Twinkle
+    - Dissolve
+    - Dissolve Rnd
+    - Sparkle
+    - Sparkle Dark
+    - Sparkle+
+    - Strobe
+    - Strobe Rainbow
+    - Strobe Mega
+    - Blink Rainbow
+    - Android
+    - Chase
+    - Chase Random
+    - Chase Rainbow
+    - Chase Flash
+    - Chase Flash Rnd
+    - Rainbow Runner
+    - Colorful
+    - Traffic Light
+    - Sweep Random
+    - Chase 2
+    - Aurora
+    - Stream
+    - Scanner
+    - Lighthouse
+    - Fireworks
+    - Rain
+    - Tetrix
+    - Fire Flicker
+    - Gradient
+    - Loading
+    - Fairy
+    - Two Dots
+    - Fairytwinkle
+    - Running Dual
+    - Chase 3
+    - Tri Wipe
+    - Tri Fade
+    - Lightning
+    - ICU
+    - Multi Comet
+    - Scanner Dual
+    - Stream 2
+    - Oscillate
+    - Pride 2012
+    - Juggle
+    - Palette
+    - Fire 2012
+    - Colorwaves
+    - Bpm
+    - Fill Noise
+    - Noise 1
+    - Noise 2
+    - Noise 3
+    - Noise 4
+    - Colortwinkles
+    - Lake
+    - Meteor
+    - Meteor Smooth
+    - Railway
+    - Ripple
+    - Twinklefox
+    - Twinklecat
+    - Halloween Eyes
+    - Solid Pattern
+    - Solid Pattern Tri
+    - Spots
+    - Spots Fade
+    - Glitter
+    - Candle
+    - Fireworks Starburst
+    - Fireworks 1D
+    - Bouncing Balls
+    - Sinelon
+    - Sinelon Dual
+    - Sinelon Rainbow
+    - Popcorn
+    - Drip
+    - Plasma
+    - Percent
+    - Ripple Rainbow
+    - Heartbeat
+    - Pacifica
+    - Candle Multi
+    - Solid Glitter
+    - Sunrise
+    - Phased
+    - Twinkleup
+    - Noise Pal
+    - Sine
+    - Phased Noise
+    - Flow
+    - Chunchun
+    - Dancing Shadows
+    - Washing Machine
+    - Candy Cane
+    - Blends
+    - TV Simulator
+    - Dynamic Smooth
+  initial: Solid
+  icon: mdi:palette
 
 ```
 </details>
