@@ -519,7 +519,6 @@ wled_desk_led_effect:
     - Dynamic Smooth
   initial: Solid
   icon: mdi:palette
-
 ```
 </details>
 
