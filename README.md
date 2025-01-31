@@ -525,7 +525,7 @@ wled_desk_led_effect:
 </details>
 
 ## 7 - Polling states from the controller (optional).
-to make this method works as 2 way communication, we will implement http polling, which will let us poll the states of the comtroller every x time. In my case i set the interval at 5 seconds.
+to make this method works as 2 way communication (changes using wled app/ui reflect to Home Assistant), we will implement http polling, which will let us poll the states of the controller every x time. In my case i set the interval at 5 seconds.
 
 * add polling logic to your `sensors.yaml`
 * replace controller ip address with yours.
