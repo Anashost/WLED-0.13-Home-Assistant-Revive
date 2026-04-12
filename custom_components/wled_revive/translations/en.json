@@ -1,0 +1,33 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Setup WLED Revive",
+        "description": "Revive your unsupported WLED controller.",
+        "data": {
+          "name": "Name (e.g. Desk LED)",
+          "ip_address": "WLED IP Address",
+          "polling_interval": "Polling Interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the WLED controller. Please check the IP address and ensure the device is powered on."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure WLED Revive",
+        "description": "Update your connection settings.\n\n💡 **Recommendation:** To prevent the IP address from changing in the future, it is highly recommended to set a Static IP (DHCP Reservation) for your WLED board inside your router's settings.",
+        "data": {
+          "ip_address": "WLED IP Address",
+          "polling_interval": "Polling Interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the new IP address. Please check the IP and ensure the device is powered on."
+    }
+  }
+}

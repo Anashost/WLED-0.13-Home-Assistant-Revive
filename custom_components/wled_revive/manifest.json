@@ -1,0 +1,11 @@
+{
+  "domain": "wled_revive",
+  "name": "WLED Revive",
+  "codeowners": ["@Anashost"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive",
+  "iot_class": "local_polling",
+  "requirements": [],
+  "version": "1.0.0"
+}
