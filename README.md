@@ -1,8 +1,21 @@
-# WLED Revive for Home Assistant
+<!-- anashost_support_badges_start -->
+[![Revolut.Me][revolut_me_shield]][revolut_me]
+[![PayPal.Me][paypal_me_shield]][paypal_me]
+[![ko_fi][ko_fi_shield]][ko_fi_me]
+[![buymecoffee][buy_me_coffee_shield]][buy_me_coffee_me]
+[![patreon][patreon_shield]][patreon_me]
+<!-- anashost_support_badges_end -->
+<!-- 
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
+-->
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![HACS Custom](https://img.shields.io/badge/HACS-Custom_Repository-orange)
-![IoT Class](https://img.shields.io/badge/IoT_Class-Local_Polling-success)
+# WLED Revive for Home Assistant
 
 **WLED Revive** is a custom integration for Home Assistant designed to restore full local control for older WLED controllers (like v0.13) that have lost native support in recent Home Assistant updates. 
 
@@ -74,3 +87,29 @@ If your WLED IP address ever changes, you can update it easily by going to Setti
 
 ## 🤝 Credits
 Developed and maintained by [@Anashost](https://github.com/Anashost).
+
+---
+
+[paypal_me_shield]: https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white
+
+[paypal_me]: https://paypal.me/anasboxsupport
+
+[revolut_me_shield]:
+https://img.shields.io/badge/revolut-FFFFFF?style=for-the-badge&logo=revolut&logoColor=black
+
+[revolut_me]: https://revolut.me/anas4e
+
+[ko_fi_shield]: https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white
+
+[ko_fi_me]: https://ko-fi.com/anasbox
+
+[buy_me_coffee_shield]: 
+https://img.shields.io/badge/Buy%20Me%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black
+
+[buy_me_coffee_me]: https://www.buymeacoffee.com/anasbox
+
+[patreon_shield]: 
+https://img.shields.io/badge/patreon-404040?style=for-the-badge&logo=patreon&logoColor=white
+
+[patreon_me]:  https://patreon.com/AnasBox
+
