@@ -1,3 +1,17 @@
+
+
+<div align="center">
+
+  <a href="https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive">
+    <img src="custom_components/wled_revive/brand/logo.png" alt="WLED Revive Logo" width="180" />
+  </a>
+
+  <br>
+
+  # WLED Revive
+  
+  **Breathe life back into your older WLED hardware inside Home Assistant.**
+
 <!-- anashost_support_badges_start -->
 [![Revolut.Me][revolut_me_shield]][revolut_me]
 [![PayPal.Me][paypal_me_shield]][paypal_me]
@@ -15,112 +29,93 @@
 ```
 -->
 
-<div align="center">
-
-  <img src="custom_components/wled_revive/brand/logo.png" alt="WLED Revive Logo" width="150" />
-
-  # WLED Revive
-
-  **Breathe life back into your older WLED hardware inside Home Assistant.**
+  <p>
+    <i>Bypassing modern WebSocket requirements to keep your perfectly good hardware out of landfills.</i>
+  </p>
 
 </div>
 
-🚨 **NOTICE: THE NEW NATIVE INTEGRATION IS HERE!**
+<br>
+
+> 🚨 **NOTICE: THE NEW NATIVE INTEGRATION IS HERE!** <br>
 > WLED Revive has been completely rebuilt as a native Home Assistant Custom Component (Config Flow). If you are looking for the old, manual YAML/Script workaround, it has been safely archived in [`OLD_WAY.md`](OLD_WAY.md).
 
----
+<br>
+
+## ✨ Next-Level Features
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <h3>🚀 Full Local Control</h3>
+      <p>100% cloud-free, hyper-local HTTP communication. No internet required.</p>
+    </td>
+    <td align="center" width="33%">
+      <h3>🎨 Dynamic Effects</h3>
+      <p>Automatically fetches and builds the exact effect list from your specific board.</p>
+    </td>
+    <td align="center" width="33%">
+      <h3>🧠 Optimistic UI</h3>
+      <p>Instant visual feedback in your Home Assistant dashboard. No waiting for polls.</p>
+    </td>
+  </tr>
+</table>
+
+<br>
 
 ## 📖 The Story: Why does this exist?
 
-WLED is undeniably one of the greatest open-source lighting projects in the world. However, as the software grew more powerful and feature-rich, the firmware size naturally expanded. 
+WLED is one of the greatest open-source lighting projects in the world. But as the software grew, the firmware became **too large to fit on older ESP8266 boards** (1MB/2MB memory). Those devices were permanently stuck on **v0.13.x**. 
 
-Eventually, the newer WLED updates (v0.14+) became **too large to fit on older ESP8266 boards** (like those with only 1MB or 2MB of memory). Those devices were permanently stuck on **v0.13.x or older**. 
+Recently, the official Home Assistant WLED integration updated to strictly require modern WebSockets. Because older firmware couldn't handle this properly, **v0.13 and older controllers broke entirely in Home Assistant**.
 
-Recently, the official Home Assistant WLED integration was updated to strictly require modern WebSockets for communication. Because older firmware couldn't handle this properly, **v0.13 and older controllers broke entirely in Home Assistant**, constantly dropping off the network or showing as "Unavailable."
+**WLED Revive is the bridge.** By reverting to WLED's highly stable local HTTP API via intelligent polling, this integration completely bypasses the WebSocket requirement. 
 
-**WLED Revive comes to the rescue.** By reverting to WLED's highly stable, local HTTP JSON API via intelligent polling, this integration completely bypasses the WebSocket requirement. 
+*(Bonus: Because it uses the standard API, WLED Revive works flawlessly with **brand-new WLED controllers** too! If you have WebSocket instability on a modern board, WLED Revive is a fantastic alternative.)*
 
-*(Bonus: Because it uses the standard API, **WLED Revive works flawlessly with brand-new WLED controllers too!** If you are having WebSocket stability issues with a modern board, WLED Revive is a fantastic alternative.)*
-
----
-
-## ✨ Features
-
-* 🚀 **Full Local Control:** 100% cloud-free, hyper-local communication.
-* ⚡ **Core Lighting Support:** Seamless toggling, brightness control, and RGB color selection.
-* 🎨 **Dynamic Effect Fetching:** Automatically reads the list of effects directly from your specific WLED board.
-* 🧠 **Optimistic UI:** Instant feedback in the Home Assistant dashboard when changing colors or states—no waiting for the next poll cycle.
-* ⚙️ **Easy Configuration:** Set up everything directly through the Home Assistant UI. No YAML required.
-* ⏱️ **Custom Polling:** Adjust the polling interval (down to the second) to balance responsiveness and network traffic.
-
----
+<br>
 
 ## 📦 Installation
 
-<details>
-<summary><b>Method 1: HACS (Recommended)</b></summary>
-<br>
-Since this integration is brand new, you will need to add it as a custom repository in HACS:
+### Method 1: HACS (Recommended)
 
 1. Open Home Assistant and navigate to **HACS** > **Integrations**.
-2. Click the three dots (`...`) in the top right corner and select **Custom repositories**.
-3. In the "Repository" field, paste this URL:
-   `https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive`
-4. In the "Category" dropdown, select **Integration**.
-5. Click **Add**, then close the window.
-6. Search for **WLED Revive** in the HACS store, click it, and select **Download**.
-7. **Restart Home Assistant** to load the integration.
+2. Click the `...` menu in the top right and select **Custom repositories**.
+3. Paste this URL: `https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive`
+4. Select **Integration** as the category and click **Add**.
+5. Search for **WLED Revive** in the HACS store, download it, and **Restart Home Assistant**.
+
+### Method 2: Manual Installation
+<details>
+<summary><i>Click here for manual install instructions</i></summary>
+<br>
+1. Download this repository as a `.zip` file.<br>
+2. Locate the `custom_components/wled_revive` folder.<br>
+3. Copy the entire folder into your Home Assistant's `config/custom_components/` directory.<br>
+4. <b>Restart Home Assistant</b>.
 </details>
 
-<details>
-<summary><b>Method 2: Manual Installation</b></summary>
 <br>
 
-1. Download the latest code from this repository as a `.zip` file.
-2. Inside the downloaded files, locate the `custom_components/wled_revive` folder.
-3. Copy the entire `wled_revive` folder into your Home Assistant's `config/custom_components/` directory. *(Create the `custom_components` folder if it doesn't exist).*
-4. **Restart Home Assistant**.
-</details>
+## ⚙️ Configuration
 
----
-
-## 🛠️ Configuration
-
-Once installed and Home Assistant is restarted, connecting your lights takes seconds:
+Set up takes seconds directly from the UI:
 
 1. Go to **Settings** -> **Devices & Services**.
-2. Click the **+ Add Integration** button in the bottom right corner.
-3. Search for **WLED Revive**.
-4. Fill in the details:
-   * **Name:** A friendly name (e.g., *Kitchen Cabinets*).
-   * **IP Address:** The local IP address of your WLED controller.
-   * **Polling Interval:** How often to check the light's status (Default: `5` seconds).
+2. Click **+ Add Integration** and search for **WLED Revive**.
+3. Enter your details:
+   * **Name:** e.g., *Kitchen Cabinets*
+   * **IP Address:** *192.168.1.100*
+   * **Polling Interval:** *(Default: 5 seconds)*
 
-> 💡 **Pro-Tip:** To prevent connection issues later, log into your Wi-Fi router and set a **Static IP (DHCP Reservation)** for your WLED board. This ensures the IP address never changes!
+> 💡 **Pro-Tip:** Log into your Wi-Fi router and set a **Static IP (DHCP Reservation)** for your WLED board so the IP address never changes!
 
----
-
-## 🚑 Troubleshooting
-
-<details>
-<summary><b>"Failed to connect to the WLED controller"</b></summary>
-<ul>
-  <li>Ensure your WLED board is powered on and connected to your Wi-Fi.</li>
-  <li>Type the IP address directly into your computer/phone's web browser. If the WLED interface doesn't load, Home Assistant can't see it either.</li>
-  <li>If the IP address changed, simply go to Settings -> Devices & Services -> WLED Revive -> <b>Configure</b> to update it.</li>
-</ul>
-</details>
-
-<details>
-<summary><b>The light takes a few seconds to update when changed from outside HA (like the WLED App)</b></summary>
-<p>This is normal! Because this integration uses local polling instead of WebSockets to maintain compatibility with older boards, Home Assistant only asks the board for its status every X seconds. You can lower the "Polling Interval" in the integration options if you want it to update faster.</p>
-</details>
-
----
+<br>
 
 <div align="center">
-  <i>Developed with ❤️ to keep perfectly good hardware out of landfills.</i><br>
-  Maintained by <a href="https://github.com/Anashost">@Anashost</a>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0055ff&height=100&section=footer" width="100%" />
+  <br>
+  <i>Developed and maintained by <a href="https://github.com/Anashost">@Anashost</a></i>
 </div>
 
 ---
