@@ -81,9 +81,12 @@ Recently, the official Home Assistant WLED integration updated to strictly requi
 
 1. Open Home Assistant and navigate to **HACS** > **Integrations**.
 2. Click the `...` menu in the top right and select **Custom repositories**.
-3. Paste this URL: `https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive`
-4. Select **Integration** as the category and click **Add**.
-5. Search for **WLED Revive** in the HACS store, download it, and **Restart Home Assistant**.
+3. Paste this URL:
+```
+https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive
+```
+5. Select **Integration** as the category and click **Add**.
+6. Search for **WLED Revive** in the HACS store, download it, and **Restart Home Assistant**.
 
 ### Method 2: Manual Installation
 <details>
