@@ -22,7 +22,6 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
             new_entities.append(WLEDMasterLight(data, config_entry.entry_id))
             known_segments.add("master")
             
-        # Parse based on explicit Segment ID, NOT array index!
         for segment in segs:
             seg_id = segment.get("id")
             if seg_id is not None and seg_id not in known_segments:
@@ -49,8 +48,11 @@ class WLEDMasterLight(WledReviveEntity, LightEntity):
         self._attr_effect_list = list(self._data["effects_map"].keys())
 
     def _get_target_segment(self):
-        """Grabs the first available segment to use as UI reference."""
+        """Native behavior: Prioritize the first SELECTED segment for reporting Master state."""
         segs = self.coordinator.data.get("state", {}).get("seg", [])
+        for seg in segs:
+            if seg.get("sel", False):
+                return seg
         return segs[0] if segs else None
 
     @property
@@ -85,11 +87,10 @@ class WLEDMasterLight(WledReviveEntity, LightEntity):
 
     async def async_turn_on(self, **kwargs):
         payload = {"on": True}
-        
-        target_seg = self._get_target_segment()
-        seg_id = target_seg.get("id", 0) if target_seg else 0
-        seg_payload = {"id": seg_id}
         update_seg = False
+        
+        # Native WLED uses an OBJECT (not an array with an ID) to target all selected segments!
+        seg_payload = {} 
         
         try: self.coordinator.data["state"]["on"] = True
         except KeyError: pass
@@ -103,6 +104,8 @@ class WLEDMasterLight(WledReviveEntity, LightEntity):
             rgb = kwargs[ATTR_RGB_COLOR]
             seg_payload["col"] = [[rgb[0], rgb[1], rgb[2]]]
             update_seg = True
+            
+            target_seg = self._get_target_segment()
             if target_seg:
                 try: target_seg["col"][0] = [rgb[0], rgb[1], rgb[2]]
                 except (KeyError, IndexError): pass
@@ -112,11 +115,15 @@ class WLEDMasterLight(WledReviveEntity, LightEntity):
             if effect_id is not None:
                 seg_payload["fx"] = effect_id
                 update_seg = True
+                
+                target_seg = self._get_target_segment()
                 if target_seg:
                     try: target_seg["fx"] = effect_id
                     except KeyError: pass
 
-        if update_seg: payload["seg"] = [seg_payload]
+        if update_seg: 
+            payload["seg"] = seg_payload # Passing dictionary directly
+
         await self._send_command(payload)
 
     async def async_turn_off(self, **kwargs):
@@ -139,7 +146,6 @@ class WLEDSegmentLight(WledReviveEntity, LightEntity):
         self._attr_effect_list = list(self._data["effects_map"].keys())
 
     def _get_segment(self):
-        """Finds the segment dictionary matching this explicit ID."""
         for seg in self.coordinator.data.get("state", {}).get("seg", []):
             if seg.get("id") == self._segment_id:
                 return seg
@@ -149,6 +155,7 @@ class WLEDSegmentLight(WledReviveEntity, LightEntity):
     def available(self) -> bool:
         if not self.coordinator.last_update_success: return False
         
+        # Hide "Main" if it's the only segment on the board
         if self._segment_id == 0:
             segs = self.coordinator.data.get("state", {}).get("seg", [])
             if len(segs) <= 1:
@@ -194,7 +201,6 @@ class WLEDSegmentLight(WledReviveEntity, LightEntity):
         
         if seg:
             seg["on"] = True
-            
             if ATTR_BRIGHTNESS in kwargs:
                 seg["bri"] = kwargs[ATTR_BRIGHTNESS]
                 seg_update["bri"] = kwargs[ATTR_BRIGHTNESS]
@@ -211,7 +217,6 @@ class WLEDSegmentLight(WledReviveEntity, LightEntity):
                     seg_update["fx"] = effect_id
                     seg["fx"] = effect_id
         else:
-            # Fallback if segment isn't found but we need to push a command
             if ATTR_BRIGHTNESS in kwargs: seg_update["bri"] = kwargs[ATTR_BRIGHTNESS]
             if ATTR_EFFECT in kwargs:
                 eff_id = self._data["effects_map"].get(kwargs[ATTR_EFFECT])
