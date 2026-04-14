@@ -144,7 +144,6 @@ class WLEDSegmentLight(WledReviveEntity, LightEntity):
         if segment_id == 0:
             self._attr_supported_color_modes = {ColorMode.BRIGHTNESS}
             self._attr_color_mode = ColorMode.BRIGHTNESS
-            self._attr_supported_features = 0 # No effects
         else:
             self._attr_supported_color_modes = {ColorMode.RGB}
             self._attr_color_mode = ColorMode.RGB
