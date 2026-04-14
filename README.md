@@ -1,11 +1,12 @@
 <div align="center">
-
+  
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF00FF,100:00FFFF&height=120&section=header" width="100%" />
 
+  
   <a href="https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive">
     <img src="https://github.com/user-attachments/assets/2bf8a585-b4f8-4bf1-894f-32f4718101f9" alt="WLED Revive Logo" width="180" />
+      <h1> WLED Revive </h1>
   </a>
-
 
   <br><br>
 
@@ -43,6 +44,18 @@
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:FF00FF,100:00FFFF&height=4" width="100%" />
 
+## 📖 What is this, exactly?
+
+Modern updates to the official Home Assistant WLED integration mandate WebSocket support. ESP8266 boards with limited memory (1MB/2MB) cannot run newer WLED firmware and are permanently stuck on **v0.13.x**. Because v0.13 handles WebSockets poorly, these controllers stopped working in Home Assistant.
+
+**WLED Revive** fixes this by reverting to WLED's stable local HTTP API. 
+
+*(Note: This integration also functions as a fallback for newer WLED controllers experiencing WebSocket instability.)*
+
+<br>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:FF00FF,100:00FFFF&height=4" width="100%" />
+
 ## ⚡ FEATURES
 
 <table>
@@ -63,18 +76,6 @@
 </table>
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:00FFFF,100:FF00FF&height=4" width="100%" />
-
-## 📖 What is this, exactly?
-
-Modern updates to the official Home Assistant WLED integration mandate WebSocket support. ESP8266 boards with limited memory (1MB/2MB) cannot run newer WLED firmware and are permanently stuck on **v0.13.x**. Because v0.13 handles WebSockets poorly, these controllers stopped working in Home Assistant.
-
-**WLED Revive** fixes this by reverting to WLED's stable local HTTP API. 
-
-*(Note: This integration also functions as a fallback for newer WLED controllers experiencing WebSocket instability.)*
-
-<br>
-
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:FF00FF,100:00FFFF&height=4" width="100%" />
 
 ## 📦 INSTALLATION
 
