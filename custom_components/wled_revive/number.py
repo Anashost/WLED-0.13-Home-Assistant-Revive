@@ -59,12 +59,6 @@ class WLEDNumber(WledReviveEntity, NumberEntity):
     @property
     def available(self) -> bool:
         if not self.coordinator.last_update_success: return False
-        
-        if self._segment_id == 0:
-            segs = self.coordinator.data.get("state", {}).get("seg", [])
-            if len(segs) <= 1:
-                return False
-                
         return self._get_segment() is not None
 
     @property
