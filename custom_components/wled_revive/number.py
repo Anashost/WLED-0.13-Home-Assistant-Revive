@@ -19,14 +19,15 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         state = coordinator.data.get("state", {})
         segs = state.get("seg", [])
         
-        for index, segment in enumerate(segs):
-            if index not in known_segments:
-                speed_name = "Speed" if index == 0 else f"Segment {index} Speed"
-                int_name = "Intensity" if index == 0 else f"Segment {index} Intensity"
+        for segment in segs:
+            seg_id = segment.get("id")
+            if seg_id is not None and seg_id not in known_segments:
+                speed_name = "Speed" if seg_id == 0 else f"Segment {seg_id} Speed"
+                int_name = "Intensity" if seg_id == 0 else f"Segment {seg_id} Intensity"
                 
-                new_entities.append(WLEDNumber(data, config_entry.entry_id, index, "sx", speed_name, "mdi:speedometer"))
-                new_entities.append(WLEDNumber(data, config_entry.entry_id, index, "ix", int_name, "mdi:creation"))
-                known_segments.add(index)
+                new_entities.append(WLEDNumber(data, config_entry.entry_id, seg_id, "sx", speed_name, "mdi:speedometer"))
+                new_entities.append(WLEDNumber(data, config_entry.entry_id, seg_id, "ix", int_name, "mdi:creation"))
+                known_segments.add(seg_id)
                 
         if new_entities:
             async_add_entities(new_entities)
@@ -49,20 +50,26 @@ class WLEDNumber(WledReviveEntity, NumberEntity):
         self._attr_native_step = 1
         self._attr_entity_category = EntityCategory.CONFIG
 
+    def _get_segment(self):
+        for seg in self.coordinator.data.get("state", {}).get("seg", []):
+            if seg.get("id") == self._segment_id:
+                return seg
+        return None
+
     @property
     def available(self) -> bool:
         if not self.coordinator.last_update_success: return False
-        return self._segment_id < len(self.coordinator.data.get("state", {}).get("seg", []))
+        return self._get_segment() is not None
 
     @property
     def native_value(self):
-        try: return self.coordinator.data["state"]["seg"][self._segment_id][self._key]
-        except (KeyError, IndexError): return 128
+        seg = self._get_segment()
+        return seg.get(self._key, 128) if seg else 128
 
     async def async_set_native_value(self, value: float) -> None:
         val = int(value)
-        try: self.coordinator.data["state"]["seg"][self._segment_id][self._key] = val
-        except KeyError: pass
+        seg = self._get_segment()
+        if seg: seg[self._key] = val
         self.coordinator.async_set_updated_data(self.coordinator.data)
 
         payload = {"seg": [{"id": self._segment_id, self._key: val}]}
