@@ -1,6 +1,5 @@
 import logging
 import async_timeout
-import asyncio
 from homeassistant.core import callback
 from homeassistant.components.light import LightEntity, ColorMode, LightEntityFeature, ATTR_BRIGHTNESS, ATTR_RGB_COLOR, ATTR_EFFECT
 from .const import DOMAIN
@@ -19,10 +18,12 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         state = coordinator.data.get("state", {})
         segs = state.get("seg", [])
         
+        # 1. Spawn the Master Light
         if "master" not in known_segments:
             new_entities.append(WLEDMasterLight(data, config_entry.entry_id))
             known_segments.add("master")
             
+        # 2. Spawn Segment Lights
         for segment in segs:
             seg_id = segment.get("id")
             if seg_id is not None and seg_id not in known_segments:
@@ -37,18 +38,23 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
 
 class WLEDMasterLight(WledReviveEntity, LightEntity):
+    """The Global Master Light (light.xx_main). Brightness & Power ONLY."""
     def __init__(self, data, entry_id):
         super().__init__(data)
         self._attr_has_entity_name = True
         self._attr_name = "Main" 
         self._attr_unique_id = f"{entry_id}_main"
         self._attr_icon = "mdi:led-strip-variant"
+        
+        # Native Behavior: Master ONLY has brightness. No colors or effects.
         self._attr_supported_color_modes = {ColorMode.BRIGHTNESS}
         self._attr_color_mode = ColorMode.BRIGHTNESS
 
     @property
     def available(self) -> bool:
         if not self.coordinator.last_update_success: return False
+        
+        # Native Behavior: Hide the Master Light entirely if there is only 1 segment
         segs = self.coordinator.data.get("state", {}).get("seg", [])
         return len(segs) > 1
 
@@ -61,18 +67,15 @@ class WLEDMasterLight(WledReviveEntity, LightEntity):
         return self.coordinator.data["state"].get("bri", 255)
 
     async def _send_command(self, payload):
-        # TRAFFIC LIGHT LOCK
-        async with self._data["lock"]:
-            try:
-                async with async_timeout.timeout(5):
-                    await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json=payload)
-                self.coordinator.async_set_updated_data(self.coordinator.data)
-            except Exception as e:
-                _LOGGER.error("Failed to send command to WLED master: %s", e)
-            finally:
-                await asyncio.sleep(0.1) # Protect ESP from spam
+        try:
+            async with async_timeout.timeout(5):
+                await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json=payload)
+            self.coordinator.async_set_updated_data(self.coordinator.data)
+        except Exception as e:
+            _LOGGER.error("Failed to send command to WLED master: %s", e)
 
     async def async_turn_on(self, **kwargs):
+        # Global Master ONLY updates global state.on and state.bri!
         payload = {"on": True}
         try: self.coordinator.data["state"]["on"] = True
         except KeyError: pass
@@ -91,10 +94,13 @@ class WLEDMasterLight(WledReviveEntity, LightEntity):
 
 
 class WLEDSegmentLight(WledReviveEntity, LightEntity):
+    """Segment Lights (light.xx for Seg 0, light.xx_segment_1 for Seg 1). Full RGB & Effects."""
     def __init__(self, data, entry_id, segment_id):
         super().__init__(data)
         self._segment_id = segment_id
         self._attr_has_entity_name = True
+        
+        # Segment 0 adopts Device Name (light.xx). Others become light.xx_segment_1
         self._attr_name = None if segment_id == 0 else f"Segment {segment_id}"
         self._attr_unique_id = f"{entry_id}_seg_{segment_id}"
         self._attr_icon = "mdi:led-strip"
@@ -139,18 +145,15 @@ class WLEDSegmentLight(WledReviveEntity, LightEntity):
         return "Solid"
 
     async def _send_command(self, payload):
-        # TRAFFIC LIGHT LOCK
-        async with self._data["lock"]:
-            try:
-                async with async_timeout.timeout(5):
-                    await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json=payload)
-                self.coordinator.async_set_updated_data(self.coordinator.data)
-            except Exception as e:
-                _LOGGER.error("Failed to send command to WLED segment: %s", e)
-            finally:
-                await asyncio.sleep(0.1)
+        try:
+            async with async_timeout.timeout(5):
+                await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json=payload)
+            self.coordinator.async_set_updated_data(self.coordinator.data)
+        except Exception as e:
+            _LOGGER.error("Failed to send command to WLED segment: %s", e)
 
     async def async_turn_on(self, **kwargs):
+        # We EXPLICITLY pass {"id": segment_id} so we NEVER overwrite other segments!
         seg_update = {"id": self._segment_id, "on": True}
         seg = self._get_segment()
         

@@ -65,16 +65,13 @@ class WLEDPresetSelect(WledReviveEntity, SelectEntity):
             self.coordinator.data["state"]["ps"] = preset_id
             self.coordinator.async_set_updated_data(self.coordinator.data)
             
-            # TRAFFIC LIGHT LOCK
-            async with self._data["lock"]:
-                try:
-                    async with async_timeout.timeout(5):
-                        await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json={"ps": preset_id})
-                    await self.coordinator.async_request_refresh()
-                except Exception as e:
-                    _LOGGER.error("Failed to set WLED preset: %s", e)
-                finally:
-                    await asyncio.sleep(0.5)
+            try:
+                async with async_timeout.timeout(5):
+                    await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json={"ps": preset_id})
+                await asyncio.sleep(0.5)
+                await self.coordinator.async_request_refresh()
+            except Exception as e:
+                _LOGGER.error("Failed to set WLED preset: %s", e)
 
 
 class WLEDPlaylistSelect(WledReviveEntity, SelectEntity):
@@ -98,16 +95,13 @@ class WLEDPlaylistSelect(WledReviveEntity, SelectEntity):
             self.coordinator.data["state"]["pl"] = playlist_id
             self.coordinator.async_set_updated_data(self.coordinator.data)
             
-            # TRAFFIC LIGHT LOCK
-            async with self._data["lock"]:
-                try:
-                    async with async_timeout.timeout(5):
-                        await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json={"pl": playlist_id})
-                    await self.coordinator.async_request_refresh()
-                except Exception as e:
-                    _LOGGER.error("Failed to set WLED playlist: %s", e)
-                finally:
-                    await asyncio.sleep(0.5)
+            try:
+                async with async_timeout.timeout(5):
+                    await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json={"pl": playlist_id})
+                await asyncio.sleep(0.5)
+                await self.coordinator.async_request_refresh()
+            except Exception as e:
+                _LOGGER.error("Failed to set WLED playlist: %s", e)
 
 
 class WLEDPaletteSelect(WledReviveEntity, SelectEntity):
@@ -147,13 +141,8 @@ class WLEDPaletteSelect(WledReviveEntity, SelectEntity):
             self.coordinator.async_set_updated_data(self.coordinator.data)
             
             payload = {"seg": [{"id": self._segment_id, "pal": pal_id}]}
-            
-            # TRAFFIC LIGHT LOCK
-            async with self._data["lock"]:
-                try:
-                    async with async_timeout.timeout(5):
-                        await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json=payload)
-                except Exception as e:
-                    _LOGGER.error("Failed to set WLED palette: %s", e)
-                finally:
-                    await asyncio.sleep(0.1)
+            try:
+                async with async_timeout.timeout(5):
+                    await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json=payload)
+            except Exception as e:
+                _LOGGER.error("Failed to set WLED palette: %s", e)

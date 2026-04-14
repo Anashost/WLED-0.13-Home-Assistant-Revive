@@ -1,6 +1,5 @@
 import logging
 import async_timeout
-import asyncio
 from homeassistant.core import callback
 from homeassistant.components.number import NumberEntity
 from homeassistant.const import EntityCategory
@@ -74,13 +73,8 @@ class WLEDNumber(WledReviveEntity, NumberEntity):
         self.coordinator.async_set_updated_data(self.coordinator.data)
 
         payload = {"seg": [{"id": self._segment_id, self._key: val}]}
-        
-        # TRAFFIC LIGHT LOCK
-        async with self._data["lock"]:
-            try:
-                async with async_timeout.timeout(5):
-                    await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json=payload)
-            except Exception as e:
-                _LOGGER.error("Failed to update WLED parameter: %s", e)
-            finally:
-                await asyncio.sleep(0.1)
+        try:
+            async with async_timeout.timeout(5):
+                await self._data["session"].post(f"http://{self._data['ip_address']}/json/state", json=payload)
+        except Exception as e:
+            _LOGGER.error("Failed to update WLED parameter: %s", e)
