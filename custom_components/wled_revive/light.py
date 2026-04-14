@@ -140,10 +140,16 @@ class WLEDSegmentLight(WledReviveEntity, LightEntity):
         self._attr_name = "Main" if segment_id == 0 else f"Segment {segment_id}"
         self._attr_unique_id = f"{entry_id}_seg_{segment_id}"
         self._attr_icon = "mdi:led-strip"
-        self._attr_supported_color_modes = {ColorMode.RGB}
-        self._attr_color_mode = ColorMode.RGB
-        self._attr_supported_features = LightEntityFeature.EFFECT
-        self._attr_effect_list = list(self._data["effects_map"].keys())
+        
+        if segment_id == 0:
+            self._attr_supported_color_modes = {ColorMode.BRIGHTNESS}
+            self._attr_color_mode = ColorMode.BRIGHTNESS
+            self._attr_supported_features = 0 # No effects
+        else:
+            self._attr_supported_color_modes = {ColorMode.RGB}
+            self._attr_color_mode = ColorMode.RGB
+            self._attr_supported_features = LightEntityFeature.EFFECT
+            self._attr_effect_list = list(self._data["effects_map"].keys())
 
     def _get_segment(self):
         for seg in self.coordinator.data.get("state", {}).get("seg", []):
