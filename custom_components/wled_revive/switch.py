@@ -25,11 +25,12 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         state = coordinator.data.get("state", {})
         segs = state.get("seg", [])
         
-        for index, segment in enumerate(segs):
-            if index not in known_segments:
-                rev_name = "Reverse" if index == 0 else f"Segment {index} Reverse"
-                new_entities.append(WLEDSegmentReverseSwitch(data, config_entry.entry_id, index, rev_name))
-                known_segments.add(index)
+        for segment in segs:
+            seg_id = segment.get("id")
+            if seg_id is not None and seg_id not in known_segments:
+                rev_name = "Reverse" if seg_id == 0 else f"Segment {seg_id} Reverse"
+                new_entities.append(WLEDSegmentReverseSwitch(data, config_entry.entry_id, seg_id, rev_name))
+                known_segments.add(seg_id)
                 
         if new_entities:
             async_add_entities(new_entities)
@@ -118,21 +119,26 @@ class WLEDSegmentReverseSwitch(WledReviveEntity, SwitchEntity):
         self._attr_icon = "mdi:swap-horizontal"
         self._attr_entity_category = EntityCategory.CONFIG
 
+    def _get_segment(self):
+        for seg in self.coordinator.data.get("state", {}).get("seg", []):
+            if seg.get("id") == self._segment_id:
+                return seg
+        return None
+
     @property
     def available(self) -> bool:
         if not self.coordinator.last_update_success: return False
-        return self._segment_id < len(self.coordinator.data.get("state", {}).get("seg", []))
+        return self._get_segment() is not None
 
     @property
     def is_on(self):
-        try: return self.coordinator.data["state"]["seg"][self._segment_id].get("rev", False)
-        except (KeyError, IndexError): return False
+        seg = self._get_segment()
+        return seg.get("rev", False) if seg else False
 
     async def _send_command(self, is_on):
-        try:
-            self.coordinator.data["state"]["seg"][self._segment_id]["rev"] = is_on
-            self.coordinator.async_set_updated_data(self.coordinator.data)
-        except KeyError: pass
+        seg = self._get_segment()
+        if seg: seg["rev"] = is_on
+        self.coordinator.async_set_updated_data(self.coordinator.data)
 
         payload = {"seg": [{"id": self._segment_id, "rev": is_on}]}
         try:
