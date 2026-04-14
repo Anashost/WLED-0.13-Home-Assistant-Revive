@@ -27,11 +27,12 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         state = coordinator.data.get("state", {})
         segs = state.get("seg", [])
         
-        for index, segment in enumerate(segs):
-            if index not in known_segments:
-                pal_name = "Color Palette" if index == 0 else f"Segment {index} Color Palette"
-                new_entities.append(WLEDPaletteSelect(data, config_entry.entry_id, index, pal_name))
-                known_segments.add(index)
+        for segment in segs:
+            seg_id = segment.get("id")
+            if seg_id is not None and seg_id not in known_segments:
+                pal_name = "Color Palette" if seg_id == 0 else f"Segment {seg_id} Color Palette"
+                new_entities.append(WLEDPaletteSelect(data, config_entry.entry_id, seg_id, pal_name))
+                known_segments.add(seg_id)
                 
         if new_entities:
             async_add_entities(new_entities)
@@ -114,24 +115,29 @@ class WLEDPaletteSelect(WledReviveEntity, SelectEntity):
         self._attr_entity_category = EntityCategory.CONFIG  
         self._attr_options = list(self._data["palettes_map"].keys())
 
+    def _get_segment(self):
+        for seg in self.coordinator.data.get("state", {}).get("seg", []):
+            if seg.get("id") == self._segment_id:
+                return seg
+        return None
+
     @property
     def available(self) -> bool:
         if not self.coordinator.last_update_success: return False
-        return self._segment_id < len(self.coordinator.data.get("state", {}).get("seg", []))
+        return self._get_segment() is not None
 
     @property
     def current_option(self):
-        try:
-            pal_id = self.coordinator.data["state"]["seg"][self._segment_id]["pal"]
-            return self._data["id_to_palette"].get(pal_id, "Default")
-        except (IndexError, KeyError):
-            return "Default"
+        seg = self._get_segment()
+        if seg and "pal" in seg:
+            return self._data["id_to_palette"].get(seg["pal"], "Default")
+        return "Default"
 
     async def async_select_option(self, option: str) -> None:
         pal_id = self._data["palettes_map"].get(option)
         if pal_id is not None:
-            try: self.coordinator.data["state"]["seg"][self._segment_id]["pal"] = pal_id
-            except KeyError: pass
+            seg = self._get_segment()
+            if seg: seg["pal"] = pal_id
             self.coordinator.async_set_updated_data(self.coordinator.data)
             
             payload = {"seg": [{"id": self._segment_id, "pal": pal_id}]}
