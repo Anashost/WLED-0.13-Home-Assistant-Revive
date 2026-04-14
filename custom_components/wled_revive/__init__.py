@@ -54,11 +54,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     )
     await coordinator.async_config_entry_first_refresh()
 
-    effect_list = coordinator.data.get("effects", ["Solid"])
+    # THE FIX: Using 'or' catches if WLED returns null for these arrays!
+    effect_list = coordinator.data.get("effects") or ["Solid"]
     effects_map = {eff_name: index for index, eff_name in enumerate(effect_list)}
     id_to_effect = {index: eff_name for index, eff_name in enumerate(effect_list)}
 
-    palette_list = coordinator.data.get("palettes", ["Default"])
+    palette_list = coordinator.data.get("palettes") or ["Default"]
     palettes_map = {pal_name: index for index, pal_name in enumerate(palette_list)}
     id_to_palette = {index: pal_name for index, pal_name in enumerate(palette_list)}
 
