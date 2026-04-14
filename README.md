@@ -3,13 +3,14 @@
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF00FF,100:00FFFF&height=120&section=header" width="100%" />
 
   <a href="https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive">
-    <img src="custom_components/wled_revive/brand/logo.png" alt="WLED Revive Logo" width="180" />
+    <img src="https://github.com/user-attachments/assets/2bf8a585-b4f8-4bf1-894f-32f4718101f9" alt="WLED Revive Logo" width="180" />
   </a>
+
 
   <br><br>
 
   <a href="https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=26&pause=1000&color=00FFFF&center=true&vCenter=true&width=800&lines=REACTIVATE+LEGACY+HARDWARE;BYPASS+WEBSOCKET+REQUIREMENTS;LOCAL+HTTP+CONTROL" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=20&pause=1000&color=00FFFF&center=true&vCenter=true&width=800&lines=REACTIVATE+LEGACY+HARDWARE;BYPASS+WEBSOCKET+REQUIREMENTS;LOCAL+HTTP+CONTROL" alt="Typing SVG" />
   </a>
 
   <p>
