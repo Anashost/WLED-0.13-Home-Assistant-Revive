@@ -1,5 +1,6 @@
 import logging
 import async_timeout
+import asyncio
 from datetime import timedelta
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -18,11 +19,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     session = async_get_clientsession(hass)
 
-    # Fetch Presets & Playlists dynamically
-    presets_map = {}
-    id_to_preset = {}
-    playlists_map = {}
-    id_to_playlist = {}
+    presets_map, id_to_preset, playlists_map, id_to_playlist = {}, {}, {}, {}
     try:
         async with async_timeout.timeout(5):
             async with session.get(f"http://{ip_address}/presets.json") as response:
@@ -30,7 +27,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                     presets_data = await response.json()
                     for p_id, p_data in presets_data.items():
                         if p_id != "0" and isinstance(p_data, dict) and "n" in p_data:
-                            # If it contains a 'playlist' object, sort it into the playlist map
                             if "playlist" in p_data:
                                 playlists_map[p_data["n"]] = int(p_id)
                                 id_to_playlist[int(p_id)] = p_data["n"]
@@ -54,7 +50,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     )
     await coordinator.async_config_entry_first_refresh()
 
-    # THE FIX: Using 'or' catches if WLED returns null for these arrays!
     effect_list = coordinator.data.get("effects") or ["Solid"]
     effects_map = {eff_name: index for index, eff_name in enumerate(effect_list)}
     id_to_effect = {index: eff_name for index, eff_name in enumerate(effect_list)}
@@ -63,10 +58,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     palettes_map = {pal_name: index for index, pal_name in enumerate(palette_list)}
     id_to_palette = {index: pal_name for index, pal_name in enumerate(palette_list)}
 
-    # Store everything
+    # STORE THE LOCK HERE
     hass.data[DOMAIN][entry.entry_id] = {
         "coordinator": coordinator,
         "session": session,
+        "lock": asyncio.Lock(), 
         "ip_address": ip_address,
         "name": name,
         "effects_map": effects_map,
