@@ -11,7 +11,7 @@
   <br><br>
 
   <a href="https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=20&pause=1000&color=00FFFF&center=true&vCenter=true&width=800&lines=REACTIVATE+LEGACY+HARDWARE;BYPASS+WEBSOCKET+REQUIREMENTS;LOCAL+HTTP+CONTROL" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=25&pause=1000&color=00FFFF&center=true&vCenter=true&width=800&lines=REACTIVATE+LEGACY+HARDWARE;BYPASS+WEBSOCKET+REQUIREMENTS;LOCAL+HTTP+CONTROL" alt="Typing SVG" />
   </a>
 
   <p>
