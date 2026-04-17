@@ -36,7 +36,7 @@
   <br><br>
 
 > 🚨 **NOTICE: NATIVE INTEGRATION ONLINE** <br>
-> WLED Revive is now a **Native Home Assistant Custom Component (Config Flow)**. No manual YAML required. The old manual scripts are archived in [OLD_WAY.md](OLD_WAY.md).
+> WLED Revive is now a **Native Home Assistant Custom Component**. No manual YAML required. The old manual scripts are archived in [OLD_WAY.md](OLD_WAY.md).
 
 </div>
 
@@ -46,9 +46,9 @@
 
 ## 📖 What is this, exactly?
 
-Modern updates to the official Home Assistant WLED integration mandate WebSocket support. ESP8266 boards with limited memory (1MB/2MB) cannot run newer WLED firmware and are permanently stuck on **v0.13.x**. Because v0.13 handles WebSockets poorly, these controllers stopped working in Home Assistant.
+Modern updates to the official Home Assistant WLED integration requires WebSocket support. ESP8266 boards with limited memory (1MB/2MB) cannot run newer WLED firmware and are permanently stuck on **v0.13.x**. Because v0.13 handles WebSockets poorly, these controllers stopped working in Home Assistant, and v0.14 became the minimum requirement.
 
-**WLED Revive** fixes this by reverting to WLED's stable local HTTP API. 
+**WLED Revive** fixes this by reverting to WLED's stable local HTTP API, reviving your old v0.13.x controllers.
 
 *(Note: This integration also functions as a fallback for newer WLED controllers experiencing WebSocket instability.)*
 
