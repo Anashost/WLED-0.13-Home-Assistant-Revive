@@ -106,7 +106,8 @@ https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive
    * **IP Address:** *192.168.1.100*
    * **Polling Interval:** *(Default: 5 seconds)*
 
-> 💡 **Recommendation:** Set a **Static IP (DHCP Reservation)** for your WLED board in your router settings to prevent connection drops.
+> [!TIP]
+> Set a **Static IP (DHCP Reservation)** for your WLED board in your router settings to prevent connection drops.
 
 <br>
 
