@@ -2,21 +2,21 @@
   
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF00FF,100:00FFFF&height=120&section=header" width="100%" />
 
-  
   <a href="https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive">
     <img src="https://github.com/user-attachments/assets/2bf8a585-b4f8-4bf1-894f-32f4718101f9" alt="WLED Revive Logo" width="180" />
-      <h1> WLED Revive </h1>
   </a>
 
-  <br><br>
+  <h1 align="center">WLED Revive</h1>
 
   <a href="https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=25&pause=1000&color=00FFFF&center=true&vCenter=true&width=800&lines=REACTIVATE+LEGACY+HARDWARE;BYPASS+WEBSOCKET+REQUIREMENTS;LOCAL+HTTP+CONTROL" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=700&size=25&pause=1000&color=00FFFF&center=true&vCenter=true&width=800&lines=REACTIVATE+LEGACY+HARDWARE;BYPASS+WEBSOCKET+REQUIREMENTS;LOCAL+HTTP+CONTROL" alt="Typing SVG" style="max-width: 100%;" />
   </a>
 
-  <p>
+  <p align="center">
     <i>Restores Home Assistant compatibility for older WLED devices (v0.13 and below) stuck on legacy ESP8266 hardware.</i>
   </p>
+
+  <br>
 
   <a href="https://revolut.me/anas4e">
     <img src="https://img.shields.io/badge/revolut-FFFFFF?style=for-the-badge&logo=revolut&logoColor=black" alt="Revolut" />
@@ -33,12 +33,14 @@
   <a href="https://patreon.com/AnasBox">
     <img src="https://img.shields.io/badge/patreon-404040?style=for-the-badge&logo=patreon&logoColor=white" alt="Patreon" />
   </a>
+  
   <br><br>
 
-> 🚨 **NOTICE: NATIVE INTEGRATION ONLINE** <br>
-> WLED Revive is now a **Native Home Assistant Custom Component**. No manual YAML required. The old manual scripts are archived in [OLD_WAY.md](OLD_WAY.md).
-
 </div>
+
+> [!NOTE]
+> WLED Revive is now a **Native Home Assistant Custom Component**. No manual YAML required.
+> The old manual scripts are archived in [OLD_WAY.md](OLD_WAY.md).
 
 <br>
 
@@ -46,7 +48,7 @@
 
 ## 📖 What is this, exactly?
 
-Modern updates to the official Home Assistant WLED integration requires WebSocket support. ESP8266 boards with limited memory (1MB/2MB) cannot run newer WLED firmware and are permanently stuck on **v0.13.x**. Because v0.13 handles WebSockets poorly, these controllers stopped working in Home Assistant, and v0.14 became the minimum requirement.
+Latest updates to the official Home Assistant WLED integration requires WebSocket support. ESP8266/ESP32 boards with limited memory (1MB/2MB) cannot run newer WLED firmware and are permanently stuck on **v0.13.x**. Because v0.13 handles WebSockets poorly, these controllers stopped working in Home Assistant, and v0.14 became the minimum requirement.
 
 **WLED Revive** fixes this by reverting to WLED's stable local HTTP API, reviving your old v0.13.x controllers.
 
@@ -58,22 +60,11 @@ Modern updates to the official Home Assistant WLED integration requires WebSocke
 
 ## ⚡ FEATURES
 
-<table>
-  <tr>
-    <td align="center" width="33%">
-      <h3>🌐 HTTP Polling</h3>
-      <p>Bypasses WebSockets. Uses standard HTTP API communication.</p>
-    </td>
-    <td align="center" width="33%">
-      <h3>🎨 Auto-Sync</h3>
-      <p>Fetches the exact effect list and color palettes directly from your board.</p>
-    </td>
-    <td align="center" width="33%">
-      <h3>🧠 Optimistic UI</h3>
-      <p>Updates the Home Assistant dashboard instantly, avoiding polling delay lag.</p>
-    </td>
-  </tr>
-</table>
+* **🌐 HTTP Polling:** Bypasses WebSockets. Uses standard HTTP API communication.
+* **🎨 Auto-Sync:** Fetches the exact effect list and color palettes directly from your board.
+* **🧠 Optimistic UI:** Updates the Home Assistant dashboard instantly, avoiding polling delay lag.
+
+<br>
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:00FFFF,100:FF00FF&height=4" width="100%" />
 
@@ -82,11 +73,15 @@ Modern updates to the official Home Assistant WLED integration requires WebSocke
 ### 🔵 METHOD 1: HACS (Recommended)
 
 1. Open Home Assistant and navigate to **HACS** > **Integrations**.
-2. Click the '...' menu in the top right and select **Custom repositories**.
+2. Click the `...` menu in the top right and select **Custom repositories**.
 3. Add this repository URL:
-   > https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive
-4. Set the category to **Integration** and click **Add**.
-5. Search for **WLED Revive**, download it, and **Restart Home Assistant**.
+
+```
+https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive
+```
+
+5. Set the category to **Integration** and click **Add**.
+6. Search for **WLED Revive**, download it, and **Restart Home Assistant**.
 
 ### 🟣 METHOD 2: MANUAL
 <details>
@@ -104,7 +99,7 @@ Modern updates to the official Home Assistant WLED integration requires WebSocke
 
 ## ⚙️ CONFIGURATION
 
-1. Go to **Settings** -> **Devices & Services**.
+1. Go to **Settings** > **Devices & Services**.
 2. Click **+ Add Integration** and search for **WLED Revive**.
 3. Enter your details:
    * **Name:** *Your device name*
