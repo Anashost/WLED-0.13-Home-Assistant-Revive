@@ -39,7 +39,7 @@
 </div>
 
 > [!NOTE]
-> WLED Revive is now a **Native Home Assistant Custom Component**. No manual YAML required.
+> WLED Revive is now a **Home Assistant Custom Component Integration**. No manual YAML required.
 > The old manual scripts are archived in [OLD_WAY.md](OLD_WAY.md).
 
 <br>
