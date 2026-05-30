@@ -103,7 +103,7 @@ https://github.com/Anashost/WLED-0.13-Home-Assistant-Revive
 2. Click **+ Add Integration** and search for **WLED Revive**.
 3. Enter your details:
    * **Name:** *Your device name*
-   * **IP Address:** *192.168.1.100*
+   * **IP Address:** controller ip address, example: *192.168.1.100*
    * **Polling Interval:** *(Default: 5 seconds)*
 
 > [!TIP]
